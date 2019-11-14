@@ -27,3 +27,19 @@ function Band() {
     this.membersStillDead = 0
 };
 ```
+
+    - Can be used to create a new object stored within a variable:
+    ```
+    let motleyCrue = new Band;
+    ```
+
+    - Can also pass arguments to be stored as values of keys:
+    ```
+    function Child(name){
+        this.name = name;
+        this.mother = "Ria";
+        this.father = "Ash";
+    }
+
+    let child1 = new Child("Nancy");
+    ```
