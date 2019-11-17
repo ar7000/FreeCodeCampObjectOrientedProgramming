@@ -98,3 +98,46 @@ function Band() {
     
     ```
     In the above: ash is the subtype of Human, Human is the supertype of ash, Object is the supertype of both (and all objects in JS).
+
+- Learned how to use inheritance in order to avoid repeating self. Done by creating a supertype and passing properties down to prototype of children. Example:
+
+```
+function Animal() { }
+
+Animal.prototype = {
+    constructor: Animal,
+    eat: function () {
+        console.log("nom nom nom");
+    }
+};
+
+function Dog(name) {
+    this.name = name;
+}
+
+Dog.prototype = Object.create(Animal.prototype); //Determines that Dog is child of Animal.
+
+let beagle = new Dog();
+beagle.eat(); //Logs "nom nom nom" to console.
+```
+    - Will by default give any instance of Dog the constructor property of "Animal". Can manually reset this:
+    ```
+    function Animal() { }
+
+    Animal.prototype = {
+        constructor: Animal,
+        eat: function () {
+            console.log("nom nom nom");
+        }
+    };
+
+    function Dog(name) {
+        this.name = name;
+    }
+
+    let beagle = new Dog();
+    
+    Dog.prototype.constructor = Dog;
+    
+    beagle.constructor === Dog; //Returns true
+    ```
