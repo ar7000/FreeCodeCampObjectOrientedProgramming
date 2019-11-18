@@ -141,3 +141,77 @@ beagle.eat(); //Logs "nom nom nom" to console.
     
     beagle.constructor === Dog; //Returns true
     ```
+
+    - If a common property is required across multiple unrelated objects (objects that don't share a supertype), a mixin can be used. Example:
+    ```
+    let bird = {
+        name: "Donald",
+        numLegs: 2
+    };
+
+    let boat = {
+        name: "Warrior",
+        type: "race-boat"
+    };
+
+    let glideMixin = (obj) => {
+        obj.glide = () => {
+            console.log("Glide along, brother")
+        }
+    }
+
+    glideMixin(bird);
+    glideMixin(boat);
+
+    bird.glide; //Returns "Glide along, brother"
+    boat.glide; //Returns "Glide along, brother"
+    ```
+
+- Learned to use closure to make certain properties within an object private. Done by using a variable, which can then be accessed in a function within the object. Example:
+```
+function Bird() {
+  let weight = 15;
+  this.getWeight = () => {
+      return weight
+    };
+    //Returns 15
+}
+```
+
+- Learned to use IIFE: Immediately Invoked Function Expression. Used to execute an anonymous function immediately, without the need for a function call. Commonly used to maintain data privacy as any variables and data within the function cannot be seen or accessed outside of it.
+```
+(() => {
+    const cozyNest = "A cozy nest is ready";
+    console.log(cozyNest);
+})();
+//Logs "A cozy nest is ready" to the console.
+
+console.log(cozyNest); //Will error as cozyNest is not withing global scope and is not reachable through IIFE.
+```
+    - Can be used to created a module that can be reused across code. Example:
+    ```
+    let myModule = (function(){
+    return {
+      helloMixin:function(obj) {
+        obj.hello = function(){
+            return "hello";
+        }
+      },
+      singMixin:function(obj) {
+        obj.sing = function() {
+            console.log("Singing to an awesome tune");
+        };
+      }
+    }
+    })();
+
+    function Person(name) = {
+        this.name = name;
+    }
+
+    let ash = new Person("Ash");
+
+    myModule.helloMixin(ash);
+    ash.hello();
+    console.log(ash.hello()); //Logs "hello" to console.
+    ```
